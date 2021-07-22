@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import React, {useState} from 'react'
 import './App.css';
+import {Router} from "@reach/router"
+import Home from './components/HomeAuthor';
+import Create from './components/CreateAuthor/CreateAuthor';
+import EditAuthor from './components/EditAuthor/EditAuthor';
 
 function App() {
+
+  const [ authorName, setAuthorName ] = useState({
+    name:""
+  })
+
+  const [ created, setCreated ] = useState(true)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <h1>Favorite Authors</h1>
+      <Router>
+        <Home path="/" authorName={authorName} setAuthorName={setAuthorName} created={created} setCreated={setCreated}/>
+        <Create path="/new" authorName={authorName} setAuthorName={setAuthorName} created={created} setCreated={setCreated}/>
+        <EditAuthor path="/edit/:_id" authorName={authorName} setAuthorName={setAuthorName} created={created} setCreated={setCreated}/>
+      </Router>
     </div>
   );
 }
